@@ -18,7 +18,7 @@
 
 ---
 
-## Что делает прототип
+# Что делает прототип
 
 Во время реального разговора одна и та же договорённость может несколько раз меняться.
 
@@ -328,7 +328,11 @@ timeline_v2.txt
 timeline_v3.txt
 
 TEST_RESULTS.md
+COST_ESTIMATE.md
+DELIVERY_NOTES.md
 README.md
+requirements.txt
+.gitignore
 ```
 
 Файлы, создаваемые во время обработки:
@@ -392,12 +396,11 @@ qwen2.5:7b
 
 # Установка
 
-## 1. Перейти в папку проекта
-
-PowerShell:
+## 1. Клонировать репозиторий
 
 ```powershell
-cd D:\ugc-test-task
+git clone https://github.com/akirarun/ai-meeting-intelligence.git
+cd ai-meeting-intelligence
 ```
 
 ---
@@ -405,7 +408,7 @@ cd D:\ugc-test-task
 ## 2. Установить Python-зависимости
 
 ```powershell
-pip install flask assemblyai edge-tts imageio-ffmpeg
+pip install -r requirements.txt
 ```
 
 ---
@@ -420,13 +423,13 @@ ollama --version
 
 ---
 
-## 4. Скачать модель
+## 4. Скачать локальную модель
 
 ```powershell
 ollama pull qwen2.5:7b
 ```
 
-Проверить список моделей:
+Проверить список установленных моделей:
 
 ```powershell
 ollama list
@@ -444,43 +447,61 @@ qwen2.5:7b
 
 Для распознавания речи требуется API key AssemblyAI.
 
-Ключ нельзя сохранять в GitHub-репозитории.
+API key не хранится в исходном коде и не должен коммититься в GitHub.
 
-Перед запуском проекта необходимо передать API key способом, который используется в `transcribe.py`.
-
-Рекомендуемый вариант для PowerShell:
+Перед запуском приложения в PowerShell необходимо задать переменную окружения:
 
 ```powershell
 $env:ASSEMBLYAI_API_KEY="YOUR_API_KEY"
 ```
 
-После закрытия текущего окна PowerShell такая переменная окружения перестанет действовать.
+Вместо `YOUR_API_KEY` необходимо указать собственный AssemblyAI API key.
+
+После закрытия текущего окна PowerShell эта временная переменная окружения перестанет действовать.
+
+В `transcribe.py` используются:
+
+```text
+speaker_labels=True
+language_code="ru"
+```
+
+Конкретная AssemblyAI speech model в коде явно не зафиксирована.
 
 ---
 
 # Запуск приложения
 
-Перейти в папку проекта:
-
-```powershell
-cd D:\ugc-test-task
-```
-
-Запустить Flask:
+После установки зависимостей, Ollama и настройки AssemblyAI API key запустить:
 
 ```powershell
 python app.py
 ```
 
-Ожидаемый адрес:
+Ожидаемый вывод Flask содержит:
+
+```text
+Running on http://127.0.0.1:5000
+```
+
+После этого открыть в браузере:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-Открыть этот адрес в браузере.
+`127.0.0.1` означает локальный компьютер, на котором запущено приложение.
 
-Окно PowerShell с Flask необходимо оставить открытым во время работы приложения.
+Окно PowerShell с запущенным Flask необходимо оставить открытым во время работы приложения.
+
+Предупреждение Flask:
+
+```text
+WARNING: This is a development server.
+Do not use it in a production deployment.
+```
+
+для локального demo ожидаемо.
 
 ---
 
@@ -494,7 +515,7 @@ http://127.0.0.1:5000
 4. посмотреть финальные договорённости;
 5. при необходимости нажать `▶ Прослушать`.
 
-Тестовые файлы:
+Тестовые файлы уже находятся в репозитории:
 
 ```text
 dialogue.mp3
@@ -688,7 +709,7 @@ Test 3: 5 / 5
 Полный pipeline:
 
 ```text
-393.44 секунд
+393.44 секунды
 ```
 
 Примерно:
@@ -928,15 +949,25 @@ pricing
 
 # Безопасность
 
-Перед публикацией репозитория необходимо убедиться, что в Git не попали:
+В репозитории не должны находиться:
 
 - API keys;
 - credentials;
 - secrets;
-- приватные аудиозаписи;
-- временные пользовательские uploads.
+- приватные пользовательские записи;
+- временные uploads.
 
-API key AssemblyAI не должен находиться прямо в исходном коде опубликованного репозитория.
+AssemblyAI API key передаётся через переменную окружения:
+
+```powershell
+$env:ASSEMBLYAI_API_KEY="YOUR_API_KEY"
+```
+
+Временные и runtime-файлы исключаются через:
+
+```text
+.gitignore
+```
 
 ---
 
@@ -1105,6 +1136,12 @@ Flask-приложение и браузерный интерфейс.
 - speaker labels;
 - timestamps.
 
+AssemblyAI API key читается из переменной окружения:
+
+```text
+ASSEMBLYAI_API_KEY
+```
+
 ---
 
 ## analyze_v5.py
@@ -1150,6 +1187,8 @@ commitments_v5_evidence.json
 commitments_v5_evidence.txt
 ```
 
+Эти runtime-файлы не являются обязательной частью исходного репозитория.
+
 ---
 
 # Проверка Python-файлов
@@ -1185,27 +1224,50 @@ Get-Content .\commitments_v5_evidence.txt -Encoding UTF8
 
 # Полный end-to-end запуск
 
-1. Запустить Flask:
+После клонирования репозитория:
+
+```powershell
+git clone https://github.com/akirarun/ai-meeting-intelligence.git
+cd ai-meeting-intelligence
+```
+
+Установить зависимости:
+
+```powershell
+pip install -r requirements.txt
+```
+
+Установить модель Ollama:
+
+```powershell
+ollama pull qwen2.5:7b
+```
+
+Указать AssemblyAI API key:
+
+```powershell
+$env:ASSEMBLYAI_API_KEY="YOUR_API_KEY"
+```
+
+Запустить Flask:
 
 ```powershell
 python app.py
 ```
 
-2. Открыть:
+Открыть:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-3. Выбрать MP3.
-
-4. Нажать:
+Выбрать MP3 и нажать:
 
 ```text
 Обработать новую запись
 ```
 
-5. Дождаться:
+Дождаться:
 
 ```text
 100%
@@ -1231,6 +1293,43 @@ TEST_RESULTS.md
 - обнаруженные ошибки;
 - внесённые исправления;
 - processing time.
+
+---
+
+# Оценка стоимости
+
+Подробный расчёт находится в:
+
+```text
+COST_ESTIMATE.md
+```
+
+Текущая внешняя usage-based стоимость возникает в основном на этапе AssemblyAI.
+
+Ollama + qwen2.5:7b работает локально и не создаёт отдельный usage-based API bill.
+
+Локальные CPU/GPU, электричество и production hosting в API cost estimate не включены.
+
+---
+
+# Delivery notes
+
+Подробные сведения о реализации находятся в:
+
+```text
+DELIVERY_NOTES.md
+```
+
+Документ содержит:
+
+- expected / actual;
+- failure cases;
+- архитектурные решения;
+- AI tools и модели;
+- output checks;
+- измеренное processing time;
+- cost estimate;
+- ограничения.
 
 ---
 
