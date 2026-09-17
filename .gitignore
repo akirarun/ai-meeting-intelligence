@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.*
+*.env
+secrets.*
+credentials.*
+
+# Uploads / runtime files
+uploads/
+tmp_lines/
+audio_v2_parts/
+
+# Runtime-generated outputs
+transcript.txt
+transcript.json
+events_v4.json
+events_v4_1.json
+events_v5.json
+
+commitments.json
+commitments.txt
+commitments_v4.json
+commitments_v4.txt
+commitments_v4_1.json
+commitments_v4_1.txt
+commitments_v5.json
+commitments_v5.txt
+commitments_v5_evidence.json
+commitments_v5_evidence.txt
+commitments_v5_fixed.json
+commitments_v5_fixed.txt
+
+reasoning.txt
+
+# Large / unnecessary downloaded source archive
+ffmpeg-9.0.1.tar.xz
+
+# Windows
+desktop.ini
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Misc
+Текстовый документ.txt
+
+# Old experimental analysis versions
+analyze.py
+analyze_v2.py
+analyze_v3.py
+analyze_v4.py
+analyze_v4_1.py
+resolve_v5_fix.py
