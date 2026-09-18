@@ -19,7 +19,7 @@ TRANSCRIBE_SCRIPT = BASE_DIR / "transcribe.py"
 ANALYZE_SCRIPT = BASE_DIR / "analyze_v5.py"
 RESOLVE_SCRIPT = BASE_DIR / "resolve_v5_evidence.py"
 
-WORKING_AUDIO = BASE_DIR / "dialogue.mp3"
+WORKING_AUDIO = BASE_DIR / "working_audio.mp3"
 TRANSCRIPT_FILE = BASE_DIR / "transcript.txt"
 EVENTS_FILE = BASE_DIR / "events_v5.json"
 COMMITMENTS_FILE = BASE_DIR / "commitments_v5_evidence.json"

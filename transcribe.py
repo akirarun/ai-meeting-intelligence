@@ -11,7 +11,7 @@ import assemblyai as aai
 
 
 API_KEY = os.getenv("ASSEMBLYAI_API_KEY")
-AUDIO_FILE = "dialogue.mp3"
+AUDIO_FILE = "working_audio.mp3"
 
 
 if not API_KEY:
