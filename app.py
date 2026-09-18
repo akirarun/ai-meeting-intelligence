@@ -17,6 +17,13 @@ BASE_DIR = Path(__file__).parent
 UPLOAD_DIR = BASE_DIR / "uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 
+for stale_upload in UPLOAD_DIR.iterdir():
+    if stale_upload.is_file():
+        try:
+            stale_upload.unlink()
+        except OSError:
+            pass
+
 TRANSCRIBE_SCRIPT = BASE_DIR / "transcribe.py"
 ANALYZE_SCRIPT = BASE_DIR / "analyze_v5.py"
 RESOLVE_SCRIPT = BASE_DIR / "resolve_v5_evidence.py"
