@@ -8,6 +8,7 @@ import time
 import json
 import uuid
 import sys
+import re
 import imageio_ffmpeg
 
 
@@ -34,6 +35,50 @@ EVENTS_FILE = BASE_DIR / "events_v5.json"
 COMMITMENTS_FILE = BASE_DIR / "commitments_v5_evidence.json"
 
 MAX_AUDIO_SECONDS = 180
+
+
+def get_audio_duration_seconds(audio_path: Path) -> float:
+    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+
+    result = subprocess.run(
+        [
+            ffmpeg_exe,
+            "-hide_banner",
+            "-i",
+            str(audio_path),
+        ],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+
+    ffmpeg_output = (
+        result.stderr
+        or result.stdout
+        or ""
+    )
+
+    match = re.search(
+        r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)",
+        ffmpeg_output,
+    )
+
+    if not match:
+        raise RuntimeError(
+            "FFmpeg did not return audio duration."
+        )
+
+    hours = int(match.group(1))
+    minutes = int(match.group(2))
+    seconds = float(match.group(3))
+
+    return (
+        hours * 3600
+        + minutes * 60
+        + seconds
+    )
+
 
 jobs = {}
 jobs_lock = threading.Lock()
@@ -2715,10 +2760,8 @@ def start_job():
     )
 
     try:
-        _, duration_seconds = (
-            imageio_ffmpeg.count_frames_and_secs(
-                str(uploaded_path)
-            )
+        duration_seconds = get_audio_duration_seconds(
+            uploaded_path
         )
     except Exception:
         uploaded_path.unlink(
