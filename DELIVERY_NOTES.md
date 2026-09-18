@@ -1518,11 +1518,11 @@ $0 external API usage cost
 
 
 
-Точное суммарное время разработки проекта не фиксировалось таймером.
+Approximate development time: ~2.5 working days.
 
 
 
-Поэтому в delivery notes не указывается придуманное количество часов.
+The exact time was not timer-tracked; this estimate was reconstructed from the actual work sessions.
 
 
 
