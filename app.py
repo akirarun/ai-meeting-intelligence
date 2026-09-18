@@ -7,6 +7,7 @@ import threading
 import time
 import json
 import uuid
+import imageio_ffmpeg
 
 
 app = Flask(__name__)
@@ -23,6 +24,8 @@ WORKING_AUDIO = BASE_DIR / "working_audio.mp3"
 TRANSCRIPT_FILE = BASE_DIR / "transcript.txt"
 EVENTS_FILE = BASE_DIR / "events_v5.json"
 COMMITMENTS_FILE = BASE_DIR / "commitments_v5_evidence.json"
+
+MAX_AUDIO_SECONDS = 180
 
 jobs = {}
 jobs_lock = threading.Lock()
@@ -2687,6 +2690,38 @@ def start_job():
     audio.save(
         uploaded_path
     )
+
+    try:
+        _, duration_seconds = (
+            imageio_ffmpeg.count_frames_and_secs(
+                str(uploaded_path)
+            )
+        )
+    except Exception:
+        uploaded_path.unlink(
+            missing_ok=True
+        )
+
+        return jsonify(
+            {
+                "error":
+                    "Не удалось определить "
+                    "длительность MP3."
+            }
+        ), 400
+
+    if duration_seconds > MAX_AUDIO_SECONDS:
+        uploaded_path.unlink(
+            missing_ok=True
+        )
+
+        return jsonify(
+            {
+                "error":
+                    "Аудиозапись должна быть "
+                    "не длиннее 3 минут."
+            }
+        ), 400
 
     with jobs_lock:
 
