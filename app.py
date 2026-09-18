@@ -7,6 +7,7 @@ import threading
 import time
 import json
 import uuid
+import sys
 import imageio_ffmpeg
 
 
@@ -2411,7 +2412,7 @@ def process_job_inner(
 
         run_process_with_progress(
             [
-                "python",
+                sys.executable,
                 str(
                     TRANSCRIBE_SCRIPT
                 )
@@ -2459,7 +2460,7 @@ def process_job_inner(
 
         run_process_with_progress(
             [
-                "python",
+                sys.executable,
                 str(
                     ANALYZE_SCRIPT
                 )
@@ -2500,7 +2501,7 @@ def process_job_inner(
 
         resolver = subprocess.run(
             [
-                "python",
+                sys.executable,
                 str(
                     RESOLVE_SCRIPT
                 )
