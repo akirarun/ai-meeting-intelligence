@@ -1,8 +1,8 @@
-\# Delivery Notes
+# Delivery Notes
 
 
 
-\## Проект
+## Проект
 
 
 
@@ -14,33 +14,33 @@ AI Meeting Intelligence
 
 
 
-\- принятые задачи;
+- принятые задачи;
 
-\- ответственных;
+- ответственных;
 
-\- финальные дедлайны;
+- финальные дедлайны;
 
-\- отменённые задачи;
+- отменённые задачи;
 
-\- отклонённые предложения;
+- отклонённые предложения;
 
-\- нерешённые вопросы;
+- нерешённые вопросы;
 
-\- отсутствующие owner / deadline;
+- отсутствующие owner / deadline;
 
-\- supporting quote;
+- supporting quote;
 
-\- supporting timestamp;
+- supporting timestamp;
 
-\- возможность прослушать соответствующий фрагмент исходного аудио.
-
-
-
-\---
+- возможность прослушать соответствующий фрагмент исходного аудио.
 
 
 
-\# Что ожидалось от решения
+---
+
+
+
+# Что ожидалось от решения
 
 
 
@@ -52,27 +52,27 @@ AI Meeting Intelligence
 
 
 
-\- предложение задачи;
+- предложение задачи;
 
-\- подтверждённая задача;
+- подтверждённая задача;
 
-\- назначение ответственного;
+- назначение ответственного;
 
-\- назначение дедлайна;
+- назначение дедлайна;
 
-\- изменение дедлайна;
+- изменение дедлайна;
 
-\- отмена задачи;
+- отмена задачи;
 
-\- отклонение предложения;
+- отклонение предложения;
 
-\- задача без назначенного owner;
+- задача без назначенного owner;
 
-\- задача без дедлайна;
+- задача без дедлайна;
 
-\- относительная дата без достаточного calendar context;
+- относительная дата без достаточного calendar context;
 
-\- неоднозначная или условная формулировка, которая не должна становиться твёрдым commitment.
+- неоднозначная или условная формулировка, которая не должна становиться твёрдым commitment.
 
 
 
@@ -80,19 +80,19 @@ AI Meeting Intelligence
 
 
 
-\- supporting quote;
+- supporting quote;
 
-\- timestamp;
+- timestamp;
 
-\- возможность прослушать соответствующий участок аудио.
-
-
-
-\---
+- возможность прослушать соответствующий участок аудио.
 
 
 
-\# Что реализовано
+---
+
+
+
+# Что реализовано
 
 
 
@@ -100,31 +100,31 @@ AI Meeting Intelligence
 
 
 
-1\. Пользователь загружает MP3 через браузер.
+1. Пользователь загружает MP3 через браузер.
 
-2\. AssemblyAI выполняет speech-to-text.
+2. AssemblyAI выполняет speech-to-text.
 
-3\. AssemblyAI определяет speaker labels и timestamps.
+3. AssemblyAI определяет speaker labels и timestamps.
 
-4\. Ollama + qwen2.5:7b анализирует transcript.
+4. Ollama + qwen2.5:7b анализирует transcript.
 
-5\. LLM извлекает хронологические события.
+5. LLM извлекает хронологические события.
 
-6\. Deterministic Python resolver определяет финальное состояние.
+6. Deterministic Python resolver определяет финальное состояние.
 
-7\. Flask UI показывает результат.
+7. Flask UI показывает результат.
 
-8\. Для каждого элемента отображаются supporting quote и timestamp.
+8. Для каждого элемента отображаются supporting quote и timestamp.
 
-9\. Пользователь может прослушать evidence segment прямо из браузера.
-
-
-
-\---
+9. Пользователь может прослушать evidence segment прямо из браузера.
 
 
 
-\# Архитектура
+---
+
+
+
+# Архитектура
 
 
 
@@ -184,15 +184,15 @@ Final commitments + supporting audio playback
 
 
 
-\---
+---
 
 
 
-\# Использованные AI-инструменты и модели
+# Использованные AI-инструменты и модели
 
 
 
-\## Speech recognition
+## Speech recognition
 
 
 
@@ -204,11 +204,11 @@ AssemblyAI
 
 
 
-\- speech-to-text;
+- speech-to-text;
 
-\- speaker labels;
+- speaker labels;
 
-\- timestamps.
+- timestamps.
 
 
 
@@ -216,11 +216,11 @@ AssemblyAI
 
 
 
-speaker\_labels=True
+speaker_labels=True
 
 
 
-language\_code="ru"
+language_code="ru"
 
 
 
@@ -228,11 +228,11 @@ language\_code="ru"
 
 
 
-\---
+---
 
 
 
-\## LLM reasoning
+## LLM reasoning
 
 
 
@@ -256,19 +256,19 @@ qwen2.5:7b
 
 
 
-\- прочитать transcript;
+- прочитать transcript;
 
-\- извлечь хронологический список событий;
+- извлечь хронологический список событий;
 
-\- определить тип каждого события;
+- определить тип каждого события;
 
-\- извлечь owner;
+- извлечь owner;
 
-\- извлечь deadline;
+- извлечь deadline;
 
-\- извлечь supporting quote;
+- извлечь supporting quote;
 
-\- сохранить смысл изменения договорённости.
+- сохранить смысл изменения договорённости.
 
 
 
@@ -276,11 +276,11 @@ LLM не формирует финальное состояние напряму
 
 
 
-\---
+---
 
 
 
-\# Почему используется deterministic resolver
+# Почему используется deterministic resolver
 
 
 
@@ -340,11 +340,11 @@ Python отвечает за состояние и применение изме
 
 
 
-\---
+---
 
 
 
-\# Основные файлы
+# Основные файлы
 
 
 
@@ -364,7 +364,7 @@ AssemblyAI transcription, speaker labels и timestamps.
 
 
 
-analyze\_v5.py
+analyze_v5.py
 
 
 
@@ -372,7 +372,7 @@ Ollama / qwen2.5:7b event extraction.
 
 
 
-resolve\_v5\_evidence.py
+resolve_v5_evidence.py
 
 
 
@@ -380,7 +380,7 @@ Deterministic final-state resolver.
 
 
 
-TEST\_RESULTS.md
+TEST_RESULTS.md
 
 
 
@@ -388,7 +388,7 @@ TEST\_RESULTS.md
 
 
 
-COST\_ESTIMATE.md
+COST_ESTIMATE.md
 
 
 
@@ -404,11 +404,11 @@ README.md
 
 
 
-\---
+---
 
 
 
-\# Test recordings
+# Test recordings
 
 
 
@@ -420,11 +420,11 @@ dialogue.mp3
 
 
 
-dialogue\_v2.mp3
+dialogue_v2.mp3
 
 
 
-dialogue\_v3.mp3
+dialogue_v3.mp3
 
 
 
@@ -436,23 +436,23 @@ timeline.txt
 
 
 
-timeline\_v2.txt
+timeline_v2.txt
 
 
 
-timeline\_v3.txt
+timeline_v3.txt
 
 
 
-\---
+---
 
 
 
-\# Test 1
+# Test 1
 
 
 
-\## Цель
+## Цель
 
 
 
@@ -460,27 +460,27 @@ timeline\_v3.txt
 
 
 
-\- accepted task;
+- accepted task;
 
-\- owner;
+- owner;
 
-\- initial deadline;
+- initial deadline;
 
-\- corrected deadline;
+- corrected deadline;
 
-\- rejected proposal;
+- rejected proposal;
 
-\- cancelled task;
+- cancelled task;
 
-\- unresolved owner;
+- unresolved owner;
 
-\- unresolved deadline;
+- unresolved deadline;
 
-\- relative date without calendar context.
+- relative date without calendar context.
 
 
 
-\## Expected
+## Expected
 
 
 
@@ -568,11 +568,11 @@ owner
 
 
 
-date\_context
+date_context
 
 
 
-\## Actual
+## Actual
 
 
 
@@ -604,15 +604,15 @@ PASS
 
 
 
-\---
+---
 
 
 
-\# Test 2
+# Test 2
 
 
 
-\## Цель
+## Цель
 
 
 
@@ -640,7 +640,7 @@ Wednesday
 
 
 
-\## Expected
+## Expected
 
 
 
@@ -672,7 +672,7 @@ Final deadline:
 
 
 
-\## Actual
+## Actual
 
 
 
@@ -712,15 +712,15 @@ PASS
 
 
 
-\---
+---
 
 
 
-\# Test 3
+# Test 3
 
 
 
-\## Цель
+## Цель
 
 
 
@@ -752,7 +752,7 @@ PASS
 
 
 
-\## Critical expected behavior
+## Critical expected behavior
 
 
 
@@ -764,7 +764,7 @@ PASS
 
 
 
-\## Expected
+## Expected
 
 
 
@@ -812,7 +812,7 @@ deadline
 
 
 
-\## Первый результат
+## Первый результат
 
 
 
@@ -828,9 +828,9 @@ PASS
 
 
 
-\- accepted feedback-form task потерял Friday deadline;
+- accepted feedback-form task потерял Friday deadline;
 
-\- одна и та же тема была разделена на несколько похожих topics.
+- одна и та же тема была разделена на несколько похожих topics.
 
 
 
@@ -870,7 +870,7 @@ pricing
 
 
 
-\## Исправление
+## Исправление
 
 
 
@@ -950,11 +950,11 @@ PASS
 
 
 
-\---
+---
 
 
 
-\# Итог контролируемых тестов
+# Итог контролируемых тестов
 
 
 
@@ -1062,11 +1062,11 @@ Total:
 
 
 
-\---
+---
 
 
 
-\# Output check
+# Output check
 
 
 
@@ -1078,27 +1078,27 @@ Total:
 
 
 
-\- соответствует ли task ожидаемой;
+- соответствует ли task ожидаемой;
 
-\- соответствует ли owner ожидаемому;
+- соответствует ли owner ожидаемому;
 
-\- соответствует ли final deadline ожидаемому;
+- соответствует ли final deadline ожидаемому;
 
-\- отсутствуют ли superseded deadlines;
+- отсутствуют ли superseded deadlines;
 
-\- отсутствуют ли cancelled tasks среди active commitments;
+- отсутствуют ли cancelled tasks среди active commitments;
 
-\- отсутствуют ли rejected proposals среди active commitments;
+- отсутствуют ли rejected proposals среди active commitments;
 
-\- не придуман ли owner;
+- не придуман ли owner;
 
-\- не придуман ли deadline;
+- не придуман ли deadline;
 
-\- сохранена ли relative date;
+- сохранена ли relative date;
 
-\- соответствует ли supporting quote исходному transcript;
+- соответствует ли supporting quote исходному transcript;
 
-\- совпадает ли timestamp с utterance, содержащим supporting quote.
+- совпадает ли timestamp с utterance, содержащим supporting quote.
 
 
 
@@ -1114,11 +1114,11 @@ pricing block → Oksana → tomorrow
 
 
 
-\---
+---
 
 
 
-\# Evidence verification
+# Evidence verification
 
 
 
@@ -1150,15 +1150,15 @@ Timestamp привязывается к transcript utterance, содержаще
 
 
 
-\---
+---
 
 
 
-\# Обнаруженные failure cases
+# Обнаруженные failure cases
 
 
 
-\## 1. Corrected deadline regression
+## 1. Corrected deadline regression
 
 
 
@@ -1178,11 +1178,11 @@ deterministic state resolution.
 
 
 
-\---
+---
 
 
 
-\## 2. Weak supporting quote
+## 2. Weak supporting quote
 
 
 
@@ -1202,11 +1202,11 @@ deterministic state resolution.
 
 
 
-\---
+---
 
 
 
-\## 3. Quote / timestamp mismatch
+## 3. Quote / timestamp mismatch
 
 
 
@@ -1226,11 +1226,11 @@ deterministic state resolution.
 
 
 
-\---
+---
 
 
 
-\## 4. Relative date normalization
+## 4. Relative date normalization
 
 
 
@@ -1262,11 +1262,11 @@ literal relative wording имеет приоритет.
 
 
 
-\---
+---
 
 
 
-\## 5. Topic fragmentation
+## 5. Topic fragmentation
 
 
 
@@ -1286,11 +1286,11 @@ canonical topic normalization в deterministic resolver.
 
 
 
-\---
+---
 
 
 
-\## 6. ASR distortion
+## 6. ASR distortion
 
 
 
@@ -1330,15 +1330,15 @@ pricing
 
 
 
-\---
+---
 
 
 
-\# Измеренное время обработки
+# Измеренное время обработки
 
 
 
-\## Test 1
+## Test 1
 
 
 
@@ -1366,11 +1366,11 @@ Full pipeline:
 
 
 
-\---
+---
 
 
 
-\## Test 2
+## Test 2
 
 
 
@@ -1390,11 +1390,11 @@ Full pipeline:
 
 
 
-\---
+---
 
 
 
-\## Test 3
+## Test 3
 
 
 
@@ -1414,11 +1414,11 @@ Full pipeline:
 
 
 
-\---
+---
 
 
 
-\# Resolver performance
+# Resolver performance
 
 
 
@@ -1454,11 +1454,11 @@ Deterministic Python resolver работает за миллисекунды.
 
 
 
-\---
+---
 
 
 
-\# Cost estimate
+# Cost estimate
 
 
 
@@ -1466,7 +1466,7 @@ Deterministic Python resolver работает за миллисекунды.
 
 
 
-COST\_ESTIMATE.md
+COST_ESTIMATE.md
 
 
 
@@ -1510,11 +1510,11 @@ $0 external API usage cost
 
 
 
-\---
+---
 
 
 
-\# Точное время разработки
+# Точное время разработки
 
 
 
@@ -1530,51 +1530,51 @@ $0 external API usage cost
 
 
 
-\---
+---
 
 
 
-\# Что сработало хорошо
+# Что сработало хорошо
 
 
 
-\- speaker-aware transcript;
+- speaker-aware transcript;
 
-\- chronological event extraction;
+- chronological event extraction;
 
-\- deterministic final-state resolution;
+- deterministic final-state resolution;
 
-\- corrected deadline handling;
+- corrected deadline handling;
 
-\- cancellation handling;
+- cancellation handling;
 
-\- rejected proposal handling;
+- rejected proposal handling;
 
-\- unresolved owner handling;
+- unresolved owner handling;
 
-\- unresolved deadline handling;
+- unresolved deadline handling;
 
-\- relative date preservation;
+- relative date preservation;
 
-\- ambiguity handling;
+- ambiguity handling;
 
-\- quote verification;
+- quote verification;
 
-\- timestamp alignment;
+- timestamp alignment;
 
-\- evidence audio playback;
+- evidence audio playback;
 
-\- changed-recording test;
+- changed-recording test;
 
-\- controlled false-positive test.
-
-
-
-\---
+- controlled false-positive test.
 
 
 
-\# Текущие ограничения
+---
+
+
+
+# Текущие ограничения
 
 
 
@@ -1586,41 +1586,41 @@ $0 external API usage cost
 
 
 
-\- в основном протестирован на controlled Russian conversations;
+- в основном протестирован на controlled Russian conversations;
 
-\- основной сценарий — короткие записи;
+- основной сценарий — короткие записи;
 
-\- qwen2.5:7b на CPU работает медленно;
+- qwen2.5:7b на CPU работает медленно;
 
-\- качество diarization зависит от исходного аудио;
+- качество diarization зависит от исходного аудио;
 
-\- ASR может ошибаться на английских и технических словах;
+- ASR может ошибаться на английских и технических словах;
 
-\- topic normalization частично rule-based;
+- topic normalization частично rule-based;
 
-\- supporting timestamp относится к utterance, а не к точной word-level границе цитаты;
+- supporting timestamp относится к utterance, а не к точной word-level границе цитаты;
 
-\- relative dates не переводятся в абсолютные даты без calendar context;
+- relative dates не переводятся в абсолютные даты без calendar context;
 
-\- нет authentication;
+- нет authentication;
 
-\- нет multi-user storage;
+- нет multi-user storage;
 
-\- нет production database;
+- нет production database;
 
-\- нет production hosting;
+- нет production hosting;
 
-\- нет calendar integration;
+- нет calendar integration;
 
-\- нет Jira / Trello / Notion integration.
-
-
-
-\---
+- нет Jira / Trello / Notion integration.
 
 
 
-\# Что намеренно оставлено вне scope
+---
+
+
+
+# Что намеренно оставлено вне scope
 
 
 
@@ -1628,21 +1628,21 @@ $0 external API usage cost
 
 
 
-\- Google Calendar integration;
+- Google Calendar integration;
 
-\- Jira integration;
+- Jira integration;
 
-\- Trello integration;
+- Trello integration;
 
-\- Notion integration;
+- Notion integration;
 
-\- automatic task sending;
+- automatic task sending;
 
-\- production authentication;
+- production authentication;
 
-\- meeting history;
+- meeting history;
 
-\- cloud storage.
+- cloud storage.
 
 
 
@@ -1650,11 +1650,11 @@ $0 external API usage cost
 
 
 
-\---
+---
 
 
 
-\# Product decision
+# Product decision
 
 
 
@@ -1690,11 +1690,11 @@ Show evidence.
 
 
 
-\---
+---
 
 
 
-\# Финальный статус
+# Финальный статус
 
 
 
@@ -1858,11 +1858,11 @@ PASS
 
 
 
-\---
+---
 
 
 
-\# Итог
+# Итог
 
 
 
@@ -1907,4 +1907,3 @@ MP3 meeting recording
 
 
 На трёх контролируемых сценариях система достигла ожидаемого финального состояния после документированных исправлений.
-

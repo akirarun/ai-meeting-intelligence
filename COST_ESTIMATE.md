@@ -1,8 +1,8 @@
-\# Оценка стоимости обработки
+# Оценка стоимости обработки
 
 
 
-\## Общая схема
+## Общая схема
 
 
 
@@ -10,13 +10,13 @@
 
 
 
-1\. AssemblyAI — распознавание речи, speaker diarization и timestamps.
+1. AssemblyAI — распознавание речи, speaker diarization и timestamps.
 
-2\. Ollama + qwen2.5:7b — локальный анализ транскрипта.
+2. Ollama + qwen2.5:7b — локальный анализ транскрипта.
 
-3\. Python resolver — локальное определение финального состояния договорённостей.
+3. Python resolver — локальное определение финального состояния договорённостей.
 
-4\. Flask — локальный браузерный интерфейс.
+4. Flask — локальный браузерный интерфейс.
 
 
 
@@ -24,11 +24,11 @@
 
 
 
-\---
+---
 
 
 
-\# AssemblyAI
+# AssemblyAI
 
 
 
@@ -52,11 +52,11 @@ AssemblyAI указывает, что pre-recorded audio тарифицируе�
 
 
 
-\---
+---
 
 
 
-\# Вариант с Universal-2
+# Вариант с Universal-2
 
 
 
@@ -116,11 +116,11 @@ $0.0085 за 3 минуты аудио
 
 
 
-\---
+---
 
 
 
-\# Вариант с Universal-3.5 Pro
+# Вариант с Universal-3.5 Pro
 
 
 
@@ -180,11 +180,11 @@ $0.0115 за 3 минуты аудио
 
 
 
-\---
+---
 
 
 
-\# Ollama / qwen2.5:7b
+# Ollama / qwen2.5:7b
 
 
 
@@ -216,13 +216,13 @@ External API cost: $0
 
 
 
-\- CPU или GPU;
+- CPU или GPU;
 
-\- оперативную память;
+- оперативную память;
 
-\- электроэнергию;
+- электроэнергию;
 
-\- ресурсы локального компьютера.
+- ресурсы локального компьютера.
 
 
 
@@ -230,11 +230,11 @@ External API cost: $0
 
 
 
-\---
+---
 
 
 
-\# Python resolver
+# Python resolver
 
 
 
@@ -262,11 +262,11 @@ $0
 
 
 
-\---
+---
 
 
 
-\# Flask UI
+# Flask UI
 
 
 
@@ -286,11 +286,11 @@ Production hosting в этот расчёт не включён.
 
 
 
-\---
+---
 
 
 
-\# Генерация тестовых аудиозаписей
+# Генерация тестовых аудиозаписей
 
 
 
@@ -314,11 +314,11 @@ imageio-ffmpeg
 
 
 
-\---
+---
 
 
 
-\# Итоговая оценка
+# Итоговая оценка
 
 
 
@@ -394,11 +394,11 @@ AssemblyAI Universal-3.5 Pro
 
 
 
-\---
+---
 
 
 
-\# Что включено в расчёт
+# Что включено в расчёт
 
 
 
@@ -406,13 +406,13 @@ AssemblyAI Universal-3.5 Pro
 
 
 
-\- Speech-to-text
+- Speech-to-text
 
-\- Speaker diarization
+- Speaker diarization
 
-\- Local LLM reasoning
+- Local LLM reasoning
 
-\- Deterministic state resolution
+- Deterministic state resolution
 
 
 
@@ -424,11 +424,11 @@ External API cost: $0
 
 
 
-\---
+---
 
 
 
-\# Что не включено
+# Что не включено
 
 
 
@@ -436,33 +436,33 @@ External API cost: $0
 
 
 
-\- стоимость компьютера;
+- стоимость компьютера;
 
-\- электричество;
+- электричество;
 
-\- GPU или CPU infrastructure;
+- GPU или CPU infrastructure;
 
-\- production hosting;
+- production hosting;
 
-\- storage;
+- storage;
 
-\- network traffic;
+- network traffic;
 
-\- будущие платные LLM API;
+- будущие платные LLM API;
 
-\- calendar integrations;
+- calendar integrations;
 
-\- task-management integrations;
+- task-management integrations;
 
-\- стоимость разработки и поддержки.
-
-
-
-\---
+- стоимость разработки и поддержки.
 
 
 
-\# Processing time
+---
+
+
+
+# Processing time
 
 
 
@@ -498,11 +498,11 @@ Ollama + qwen2.5:7b
 
 
 
-\---
+---
 
 
 
-\# Cost / performance trade-off
+# Cost / performance trade-off
 
 
 
@@ -514,19 +514,19 @@ Ollama + qwen2.5:7b
 
 
 
-\- GPU inference;
+- GPU inference;
 
-\- меньшая локальная модель;
+- меньшая локальная модель;
 
-\- hosted LLM;
+- hosted LLM;
 
-\- prompt optimization;
+- prompt optimization;
 
-\- structured generation;
+- structured generation;
 
-\- уменьшение размера контекста;
+- уменьшение размера контекста;
 
-\- более специализированная extraction model.
+- более специализированная extraction model.
 
 
 
@@ -534,11 +534,11 @@ Ollama + qwen2.5:7b
 
 
 
-\---
+---
 
 
 
-\# Важное замечание
+# Важное замечание
 
 
 
@@ -566,11 +566,11 @@ Ollama + qwen2.5:7b
 
 
 
-\---
+---
 
 
 
-\# Краткий итог
+# Краткий итог
 
 
 
@@ -615,4 +615,3 @@ $0 external API cost
 
 
 Тарифы AssemblyAI проверены по публичной информации, актуальной на сентябрь 2026.
-
