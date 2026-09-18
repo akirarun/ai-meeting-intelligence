@@ -29,6 +29,7 @@ MAX_AUDIO_SECONDS = 180
 
 jobs = {}
 jobs_lock = threading.Lock()
+pipeline_lock = threading.Lock()
 
 
 HTML = r"""
@@ -2370,7 +2371,7 @@ def run_process_with_progress(
     return stdout
 
 
-def process_job(
+def process_job_inner(
     job_id,
     uploaded_path,
     original_filename
@@ -2620,6 +2621,20 @@ def process_job(
             error=str(
                 exc
             )
+        )
+
+
+
+def process_job(
+    job_id,
+    uploaded_path,
+    original_filename
+):
+    with pipeline_lock:
+        process_job_inner(
+            job_id,
+            uploaded_path,
+            original_filename
         )
 
 
