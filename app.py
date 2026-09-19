@@ -9,14 +9,29 @@ import json
 import uuid
 import sys
 import re
+import os
 import imageio_ffmpeg
 
 
 app = Flask(__name__)
 
 BASE_DIR = Path(__file__).parent
-UPLOAD_DIR = BASE_DIR / "uploads"
-UPLOAD_DIR.mkdir(exist_ok=True)
+
+IS_VERCEL = os.environ.get("VERCEL") == "1"
+
+UPLOAD_DIR = (
+    Path("/tmp/uploads")
+    if IS_VERCEL
+    else BASE_DIR / "uploads"
+)
+
+UPLOAD_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+DEMO_RESULT_FILE = BASE_DIR / "demo_result.json"
+DEMO_AUDIO_FILE = BASE_DIR / "dialogue.mp3"
 
 for stale_upload in UPLOAD_DIR.iterdir():
     if stale_upload.is_file():
@@ -2705,6 +2720,15 @@ def index():
 )
 def start_job():
 
+    if IS_VERCEL:
+        return jsonify(
+            {
+                "error":
+                    "Hosted demo mode: "
+                    "open the saved demo result."
+            }
+        ), 503
+
     audio = request.files.get(
         "audio"
     )
@@ -2878,6 +2902,49 @@ def job_status(
     "/dev-result"
 )
 def dev_result():
+
+    if IS_VERCEL:
+
+        if not DEMO_RESULT_FILE.exists():
+            return jsonify(
+                {
+                    "error":
+                        "demo_result.json not found"
+                }
+            ), 404
+
+        if not DEMO_AUDIO_FILE.exists():
+            return jsonify(
+                {
+                    "error":
+                        "dialogue.mp3 not found"
+                }
+            ), 404
+
+        try:
+            data = json.loads(
+                DEMO_RESULT_FILE.read_text(
+                    encoding="utf-8"
+                )
+            )
+        except Exception as exc:
+            return jsonify(
+                {
+                    "error":
+                        str(exc)
+                }
+            ), 500
+
+        data["audio_path"] = str(
+            DEMO_AUDIO_FILE
+        )
+
+        data["dev_mode"] = True
+
+        with jobs_lock:
+            jobs["demo"] = dict(data)
+
+        return jsonify(data)
 
     if (
         not TRANSCRIPT_FILE.exists()
